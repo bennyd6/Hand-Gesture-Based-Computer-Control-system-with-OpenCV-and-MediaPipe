@@ -22,7 +22,7 @@ pyautogui library (install using pip install pyautogui)
 How to Use?
 
 1) Clone the repository:
-git clone https://https://www.docsy.dev/docs/adding-content/repository-links/
+git clone https://github.com/bennyd6/Hand-Gesture-Based-Computer-Control-system-with-OpenCV-and-MediaPipe.git
 
 2) Run the script:
 python hand_mouse_control.py
