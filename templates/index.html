@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webcam CV App</title>
+</head>
+<body>
+    <h1>Webcam Feed</h1>
+    <img src="{{ url_for('video_feed') }}" width="640" height="480">
+    <button id="run-cv-button">Run CV Code</button>
+
+    <script>
+        document.getElementById('run-cv-button').addEventListener('click', function() {
+            fetch('/run_cv_code', {
+                method: 'POST'
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data.status);
+                alert(data.status);
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    </script>
+</body>
+</html>
