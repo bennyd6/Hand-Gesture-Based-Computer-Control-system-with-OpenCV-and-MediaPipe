@@ -1,14 +1,15 @@
 from flask import Flask, render_template, Response, jsonify
 import cv2
 import mediapipe as mp
-import pyautogui
+import wx
+# import pyautogui
 
 app = Flask(__name__)
 
 camera = cv2.VideoCapture(1)
 HandDetector = mp.solutions.hands.Hands()
 DrawingUtils = mp.solutions.drawing_utils
-ScreenWidth, ScreenHeight = pyautogui.size()
+ScreenWidth, ScreenHeight = wx.GetDisplaySize()
 
 def process_frame():
     indexx = 0
@@ -35,7 +36,7 @@ def process_frame():
                     cv2.circle(img=frame, center=(x, y), radius=15, color=(255, 0, 0), thickness=2)
                     indexx = ScreenWidth / FrameWidth * x
                     indexy = ScreenHeight / FrameHeight * y
-                    pyautogui.moveTo(indexx, indexy)
+                    # pyautogui.moveTo(indexx, indexy)
 
                 if id == 16:
                     ringx = ScreenWidth / FrameWidth * x
@@ -47,8 +48,8 @@ def process_frame():
                     middley = ScreenHeight / FrameHeight * y
                     if abs(indexy - middley) < 25 and ((abs(ringy - middley) > 40) and (abs(ringy - middley) < 310)):
                         print("Left Click")
-                        pyautogui.click()
-                        pyautogui.sleep(1)
+                        # pyautogui.click()
+                        # pyautogui.sleep(1)
 
                 if id == 4:
                     cv2.circle(img=frame, center=(x, y), radius=15, color=(255, 0, 0), thickness=2)
@@ -56,8 +57,8 @@ def process_frame():
                     thumby = ScreenHeight / FrameHeight * y
                     if abs(thumbx - indexx) < 40:
                         print("Recent Tabs")
-                        pyautogui.hotkey('win', 'tab')
-                        pyautogui.sleep(2)
+                        # pyautogui.hotkey('win', 'tab')
+                        # pyautogui.sleep(2)
 
                 if id == 20:
                     cv2.circle(img=frame, center=(x, y), radius=15, color=(255, 0, 0), thickness=2)
@@ -65,12 +66,12 @@ def process_frame():
                     littley = ScreenHeight / FrameHeight * y
                     if abs(thumbx - littlex) < 40:
                         print("Right Click")
-                        pyautogui.click(button='right')
-                        pyautogui.sleep(1)
+                        # pyautogui.click(button='right')
+                        # pyautogui.sleep(1)
                     if abs(littley - indexy) < 50 and abs(littlex - indexx) > 250:
                         print("Double Click")
-                        pyautogui.click(clicks=2)
-                        pyautogui.sleep(1)
+                        # pyautogui.click(clicks=2)
+                        # pyautogui.sleep(1)
 
     ret, buffer = cv2.imencode('.jpg', frame)
     frame = buffer.tobytes()
