@@ -2,4 +2,4 @@ flask
 gunicorn
 mediapipe
 opencv-python
-pyautogui
+wx
